@@ -325,22 +325,16 @@ export default function Portfolio() {
           </p>
         </div>
 
-        <div className="portfolio-grid" id="portfolio-grid">
+        <div className="portfolio-grid portfolio-grid--work" id="portfolio-grid">
           {WORK_ROWS.flatMap((row) =>
             row.cards.map((card) => (
               <article className="work-card" key={`${row.rowSrc}-${card.half}`}>
                 <div
-                  className={`work-split-thumb ${card.half === "left" ? "work-split-thumb--left" : "work-split-thumb--right"}`}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element -- composite split crops */}
-                  <img
-                    className="work-split-img"
-                    src={row.rowSrc}
-                    width={1024}
-                    height={644}
-                    alt={card.thumbAlt}
-                  />
-                </div>
+                  className={`work-split-thumb ${card.half === "right" ? "work-split-thumb--right" : ""}`}
+                  style={{ backgroundImage: `url(${encodeURI(row.rowSrc)})` }}
+                  role="img"
+                  aria-label={card.thumbAlt}
+                />
                 <div className="card-body">
                   <div className="card-category">{card.category}</div>
                   <div className="card-title-static">{card.title}</div>

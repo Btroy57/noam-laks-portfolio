@@ -267,6 +267,17 @@ body {
   gap: 1.5rem;
 }
 
+/* Work samples: always two-up like reference composites */
+.portfolio-grid--work {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 580px) {
+  .portfolio-grid--work {
+    grid-template-columns: 1fr;
+  }
+}
+
 .work-card {
   background: white;
   border: 1px solid var(--rule);
@@ -300,25 +311,19 @@ body {
   transform: scale(1.03);
 }
 
-/* Composite screenshot: left / right halves (1024×644 source, two cards per row) */
+/* Composite screenshot: one PNG per row; show left or right half via background (avoids full image in both cells) */
 .work-split-thumb {
   width: 100%;
   aspect-ratio: 512 / 644;
   overflow: hidden;
-  background: #0a0a0a;
-  position: relative;
+  background-color: #0a0a0a;
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  background-position: left center;
 }
 
-.work-split-thumb .work-split-img {
-  width: 200%;
-  height: auto;
-  max-width: none;
-  display: block;
-  transform: translateX(0);
-}
-
-.work-split-thumb--right .work-split-img {
-  transform: translateX(-50%);
+.work-split-thumb--right {
+  background-position: right center;
 }
 
 .phone-wrap {
