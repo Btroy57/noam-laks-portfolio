@@ -5,7 +5,7 @@ import { useCallback } from "react";
 
 type SectionId = "about" | "experience" | "work" | "contact";
 
-type ThumbMode = "cover" | "contain" | "video" | "phone";
+type ThumbMode = "cover" | "contain" | "contain-dark" | "video" | "phone";
 
 type WorkItem = {
   key: string;
@@ -15,8 +15,6 @@ type WorkItem = {
   thumbAlt?: string;
   thumb: ThumbMode;
   src?: string;
-  /** Fine-tune focal point for `cover` photos (e.g. fish / food crops) */
-  objectPosition?: string;
 };
 
 const WORK_ITEMS: WorkItem[] = [
@@ -95,9 +93,8 @@ const WORK_ITEMS: WorkItem[] = [
     description:
       "Full Mailchimp email campaign announcing the Oyster Bar opening — brand reveal, menu highlights, dinner menu update, and a teaser for what's next.",
     thumbAlt: "Carmel fish dish photography used for Oyster Bar launch campaign",
-    thumb: "cover",
+    thumb: "contain-dark",
     src: "/work/carmel-oyster-launch-fish.jpg",
-    objectPosition: "50% 36%",
   },
 ];
 
@@ -392,7 +389,7 @@ export default function Portfolio() {
                 </div>
               ) : item.src ? (
                 <div
-                  className={`work-card-media work-card-media--${item.thumb === "contain" ? "contain" : "cover"}`}
+                  className={`work-card-media work-card-media--${item.thumb === "contain" ? "contain" : item.thumb === "contain-dark" ? "contain-dark" : "cover"}`}
                 >
                   <Image
                     src={item.src}
@@ -402,10 +399,10 @@ export default function Portfolio() {
                     className={
                       item.thumb === "contain"
                         ? "work-card-media-img work-card-img-fit--contain"
-                        : "work-card-media-img work-card-img-fit--cover"
+                        : item.thumb === "contain-dark"
+                          ? "work-card-media-img work-card-img-fit--contain-dark"
+                          : "work-card-media-img work-card-img-fit--cover"
                     }
-                    style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
-                    priority={item.key === "bellina"}
                   />
                 </div>
               ) : null}

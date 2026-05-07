@@ -314,6 +314,19 @@ body {
   background: var(--cream);
 }
 
+/* Food photo mats (full frame visible, matches video-thumb tone) */
+.work-card-media--contain-dark {
+  background: #151210;
+}
+
+.work-card-img-fit--contain-dark {
+  object-fit: contain;
+  object-position: center;
+  padding: 0.65rem;
+  box-sizing: border-box;
+  background: transparent;
+}
+
 .work-card {
   background: white;
   border: 1px solid var(--rule);

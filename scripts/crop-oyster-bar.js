@@ -13,11 +13,12 @@ const destDir = path.resolve(process.argv[3]);
   const W = m.width ?? 646;
   const H = m.height ?? 1024;
 
+  // Wider crop = more tabletop context; no forced 4:3 resize (was re-cropping / “zooming” the dish)
   const fish = {
-    left: Math.round(W * 0.1),
-    top: Math.round(H * 0.06),
-    width: Math.round(W * 0.8),
-    height: Math.round(H * 0.28),
+    left: Math.round(W * 0.06),
+    top: Math.round(H * 0.048),
+    width: Math.round(W * 0.88),
+    height: Math.round(H * 0.34),
   };
   const seafood = {
     left: Math.round(W * 0.04),
@@ -28,13 +29,13 @@ const destDir = path.resolve(process.argv[3]);
 
   await sharp(src)
     .extract(fish)
-    .resize({ width: 1400, height: 1050, fit: "cover" })
+    .resize({ width: 1800, withoutEnlargement: false })
     .jpeg({ quality: 90, mozjpeg: true })
     .toFile(path.join(destDir, "carmel-oyster-launch-fish.jpg"));
 
   await sharp(src)
     .extract(seafood)
-    .resize({ width: 1400, height: 1050, fit: "cover" })
+    .resize({ width: 1800, withoutEnlargement: false })
     .jpeg({ quality: 90, mozjpeg: true })
     .toFile(path.join(destDir, "oyster-bar-seafood-spread.jpg"));
 
