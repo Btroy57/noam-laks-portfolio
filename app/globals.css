@@ -291,6 +291,21 @@ body {
   object-position: center;
 }
 
+/* Phone mockup for portrait IG screenshots (centered in 4:3 card) */
+.work-card-media--phone {
+  padding: 0;
+  background: #0a0a0a;
+}
+
+.work-card-media--phone .phone-inner {
+  position: relative;
+}
+
+.work-card-img-phone {
+  object-fit: cover;
+  object-position: center top;
+}
+
 .work-card-img-fit--contain {
   object-fit: contain;
   object-position: center;

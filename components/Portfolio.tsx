@@ -5,7 +5,7 @@ import { useCallback } from "react";
 
 type SectionId = "about" | "experience" | "work" | "contact";
 
-type ThumbMode = "cover" | "contain" | "video";
+type ThumbMode = "cover" | "contain" | "video" | "phone";
 
 type WorkItem = {
   key: string;
@@ -15,6 +15,8 @@ type WorkItem = {
   thumbAlt?: string;
   thumb: ThumbMode;
   src?: string;
+  /** Fine-tune focal point for `cover` photos (e.g. fish / food crops) */
+  objectPosition?: string;
 };
 
 const WORK_ITEMS: WorkItem[] = [
@@ -25,7 +27,7 @@ const WORK_ITEMS: WorkItem[] = [
     description:
       "Managed Bellina Alimentari's social presence across food content, event coverage, and brand campaigns — maintaining a distinct Italian identity across all posts.",
     thumbAlt: "Bellina Alimentari Instagram profile grid",
-    thumb: "cover",
+    thumb: "phone",
     src: "/work/bellina-instagram.png",
   },
   {
@@ -52,10 +54,9 @@ const WORK_ITEMS: WorkItem[] = [
     title: "@carmelatl — Instagram",
     description:
       "Full ownership of Carmel's Instagram — content planning, photography direction, caption writing, and publishing across feed and Reels. Grew account through consistent brand storytelling and visual cohesion.",
-    thumbAlt:
-      "Carmel Oyster Bar hero table photography — oyster spread and seafood platter from the Oyster Bar opening push",
-    thumb: "cover",
-    src: "/work/oyster-bar-seafood-spread.jpg",
+    thumbAlt: "Carmel Atlanta Instagram profile grid",
+    thumb: "phone",
+    src: "/work/carmel-instagram.png",
   },
   {
     key: "bb-happy-hour",
@@ -96,6 +97,7 @@ const WORK_ITEMS: WorkItem[] = [
     thumbAlt: "Carmel fish dish photography used for Oyster Bar launch campaign",
     thumb: "cover",
     src: "/work/carmel-oyster-launch-fish.jpg",
+    objectPosition: "50% 36%",
   },
 ];
 
@@ -373,6 +375,21 @@ export default function Portfolio() {
             <article className="work-card" key={item.key}>
               {item.thumb === "video" ? (
                 <VideoThumb />
+              ) : item.thumb === "phone" && item.src ? (
+                <div className="work-card-media work-card-media--phone">
+                  <div className="phone-wrap">
+                    <div className="phone-inner">
+                      <Image
+                        src={item.src}
+                        alt={item.thumbAlt ?? ""}
+                        fill
+                        sizes="(max-width: 580px) 100vw, 45vw"
+                        className="work-card-media-img work-card-img-phone"
+                        priority={item.key === "bellina" || item.key === "carmel-ig"}
+                      />
+                    </div>
+                  </div>
+                </div>
               ) : item.src ? (
                 <div
                   className={`work-card-media work-card-media--${item.thumb === "contain" ? "contain" : "cover"}`}
@@ -387,6 +404,7 @@ export default function Portfolio() {
                         ? "work-card-media-img work-card-img-fit--contain"
                         : "work-card-media-img work-card-img-fit--cover"
                     }
+                    style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
                     priority={item.key === "bellina"}
                   />
                 </div>
