@@ -5,7 +5,7 @@ import { useCallback } from "react";
 
 type SectionId = "about" | "experience" | "work" | "contact";
 
-type ThumbMode = "cover" | "contain" | "contain-dark" | "portrait-launch" | "video" | "phone";
+type ThumbMode = "cover" | "contain" | "contain-dark" | "press" | "portrait-launch" | "video" | "phone";
 
 type WorkItem = {
   key: string;
@@ -96,6 +96,26 @@ const WORK_ITEMS: WorkItem[] = [
       "Flat lay Carmel Oyster Bar launch table — oysters on ice, menu collateral, cocktails, and branded table setting",
     thumb: "portrait-launch",
     src: "/work/carmel-oyster-bar-launch-table.png",
+  },
+  {
+    key: "press-release",
+    category: "COPYWRITING",
+    title: "Press Release — Carmel Oyster Bar",
+    description:
+      "Wrote and distributed the official press release announcing Carmel's expanded wood-fired menu and all-day Oyster Bar launch in Buckhead Village.",
+    thumbAlt: "Press release artwork for Carmel Oyster Bar launch September 2025",
+    thumb: "press",
+    src: "/work/press-release-carmel-oyster-bar.png",
+  },
+  {
+    key: "press-coverage",
+    category: "PR",
+    title: "Press Coverage — Oliva Group",
+    description:
+      "Secured and managed press placements across 6+ outlets for Carmel, Atrium, Rina, and Bellina Alimentari — including National Geographic, Dezeen, and Discover Atlanta.",
+    thumbAlt: "Press recognition artwork listing coverage outlets for Oliva Group",
+    thumb: "press",
+    src: "/work/press-coverage-oliva-group.png",
   },
 ];
 
@@ -390,7 +410,7 @@ export default function Portfolio() {
                 </div>
               ) : item.src ? (
                 <div
-                  className={`work-card-media ${item.thumb === "contain" ? "work-card-media--contain" : item.thumb === "contain-dark" ? "work-card-media--contain-dark" : item.thumb === "portrait-launch" ? "work-card-media--contain-dark work-card-media--portrait-launch" : "work-card-media--cover"}`}
+                  className={`work-card-media ${item.thumb === "contain" ? "work-card-media--contain" : item.thumb === "contain-dark" ? "work-card-media--contain-dark" : item.thumb === "press" ? "work-card-media--press" : item.thumb === "portrait-launch" ? "work-card-media--contain-dark work-card-media--portrait-launch" : "work-card-media--cover"}`}
                 >
                   <Image
                     src={item.src}
@@ -402,9 +422,11 @@ export default function Portfolio() {
                         ? "work-card-media-img work-card-img-fit--contain"
                         : item.thumb === "contain-dark"
                           ? "work-card-media-img work-card-img-fit--contain-dark"
-                          : item.thumb === "portrait-launch"
-                            ? "work-card-media-img work-card-img--portrait-launch"
-                            : "work-card-media-img work-card-img-fit--cover"
+                          : item.thumb === "press"
+                            ? "work-card-media-img work-card-img-fit--press"
+                            : item.thumb === "portrait-launch"
+                              ? "work-card-media-img work-card-img--portrait-launch"
+                              : "work-card-media-img work-card-img-fit--cover"
                     }
                   />
                 </div>
