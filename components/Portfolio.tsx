@@ -5,7 +5,7 @@ import { useCallback } from "react";
 
 type SectionId = "about" | "experience" | "work" | "contact";
 
-type ThumbMode = "cover" | "contain" | "contain-dark" | "press" | "portrait-launch" | "video" | "phone";
+type ThumbMode = "cover" | "contain" | "contain-dark" | "press" | "video" | "phone";
 
 type WorkItem = {
   key: string;
@@ -94,7 +94,7 @@ const WORK_ITEMS: WorkItem[] = [
       "Full Mailchimp email campaign announcing the Oyster Bar opening — brand reveal, menu highlights, dinner menu update, and a teaser for what's next.",
     thumbAlt:
       "Flat lay Carmel Oyster Bar launch table — oysters on ice, menu collateral, cocktails, and branded table setting",
-    thumb: "portrait-launch",
+    thumb: "contain-dark",
     src: "/work/carmel-oyster-bar-launch-table.png",
   },
   {
@@ -410,7 +410,7 @@ export default function Portfolio() {
                 </div>
               ) : item.src ? (
                 <div
-                  className={`work-card-media ${item.thumb === "contain" ? "work-card-media--contain" : item.thumb === "contain-dark" ? "work-card-media--contain-dark" : item.thumb === "press" ? "work-card-media--press" : item.thumb === "portrait-launch" ? "work-card-media--contain-dark work-card-media--portrait-launch" : "work-card-media--cover"}`}
+                  className={`work-card-media ${item.thumb === "contain" ? "work-card-media--contain" : item.thumb === "contain-dark" ? "work-card-media--contain-dark" : item.thumb === "press" ? "work-card-media--press" : "work-card-media--cover"}`}
                 >
                   <Image
                     src={item.src}
@@ -424,9 +424,7 @@ export default function Portfolio() {
                           ? "work-card-media-img work-card-img-fit--contain-dark"
                           : item.thumb === "press"
                             ? "work-card-media-img work-card-img-fit--press"
-                            : item.thumb === "portrait-launch"
-                              ? "work-card-media-img work-card-img--portrait-launch"
-                              : "work-card-media-img work-card-img-fit--cover"
+                            : "work-card-media-img work-card-img-fit--cover"
                     }
                   />
                 </div>
