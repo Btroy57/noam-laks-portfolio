@@ -327,6 +327,19 @@ body {
   background: transparent;
 }
 
+/*
+ * Portrait marketing photo slot: frame matches-source aspect so the shot
+ * is not shrunk into landscape 4:3 (looks “wrong scale”). PNG is 646×1024.
+ */
+.work-card-media.work-card-media--portrait-launch {
+  aspect-ratio: 646 / 1024;
+}
+
+.work-card-img--portrait-launch {
+  object-fit: contain;
+  object-position: center center;
+}
+
 .work-card {
   background: white;
   border: 1px solid var(--rule);
