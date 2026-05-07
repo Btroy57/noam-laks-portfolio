@@ -92,9 +92,10 @@ const WORK_ITEMS: WorkItem[] = [
     title: "Carmel Oyster Bar Launch",
     description:
       "Full Mailchimp email campaign announcing the Oyster Bar opening — brand reveal, menu highlights, dinner menu update, and a teaser for what's next.",
-    thumbAlt: "Carmel fish dish photography used for Oyster Bar launch campaign",
+    thumbAlt:
+      "Flat lay Carmel Oyster Bar launch table — oysters on ice, menu collateral, cocktails, and branded table setting",
     thumb: "contain-dark",
-    src: "/work/carmel-oyster-launch-fish.jpg",
+    src: "/work/carmel-oyster-bar-launch-table.png",
   },
 ];
 
