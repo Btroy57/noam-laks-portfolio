@@ -1,110 +1,153 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback } from "react";
 
 type SectionId = "about" | "experience" | "work" | "contact";
 
-type WorkHalf = "left" | "right";
+type ThumbMode = "cover" | "contain" | "video";
 
-type WorkCardDef = {
-  half: WorkHalf;
+type WorkItem = {
+  key: string;
   category: string;
   title: string;
   description: string;
-  thumbAlt: string;
+  thumbAlt?: string;
+  thumb: ThumbMode;
+  src?: string;
 };
 
-type WorkRowDef = {
-  rowSrc: string;
-  cards: [WorkCardDef, WorkCardDef];
-};
-
-const WORK_ROWS: WorkRowDef[] = [
+const WORK_ITEMS: WorkItem[] = [
   {
-    rowSrc: "/work/row-bellina-whm.png",
-    cards: [
-      {
-        half: "left",
-        category: "Social Media Management",
-        title: "@bellinaalimentari — Instagram",
-        description:
-          "Managed Bellina Alimentari's social presence across food content, event coverage, and brand campaigns — maintaining a distinct Italian identity across all posts.",
-        thumbAlt: "Bellina Alimentari Instagram grid in phone mockup",
-      },
-      {
-        half: "right",
-        category: "Design",
-        title: "Women's History Month Menu",
-        description:
-          "Seasonal cocktail menu design tying each drink to a trailblazing woman, with proceeds benefiting the Cool Girls Foundation.",
-        thumbAlt: "Women's History Month cocktail menu design",
-      },
-    ],
+    key: "bellina",
+    category: "Social Media Management",
+    title: "@bellinaalimentari — Instagram",
+    description:
+      "Managed Bellina Alimentari's social presence across food content, event coverage, and brand campaigns — maintaining a distinct Italian identity across all posts.",
+    thumbAlt: "Bellina Alimentari Instagram profile grid",
+    thumb: "cover",
+    src: "/work/bellina-instagram.png",
   },
   {
-    rowSrc: "/work/row-video-carmel.png",
-    cards: [
-      {
-        half: "left",
-        category: "Content Creation & Video Editing",
-        title: "Short-Form Video — Carmel",
-        description:
-          "Filmed, directed, and edited short-form video content for TikTok and Instagram Reels — part of a content series that drove 30K+ views and grew Carmel's social presence.",
-        thumbAlt: "Short-form video reel graphic for Carmel",
-      },
-      {
-        half: "right",
-        category: "Social Media Management",
-        title: "@carmelatl — Instagram",
-        description:
-          "Full ownership of Carmel's Instagram — content planning, photography direction, caption writing, and publishing across feed and Reels. Grew account through consistent brand storytelling and visual cohesion.",
-        thumbAlt: "Carmel Atlanta Instagram profile in phone mockup",
-      },
-    ],
+    key: "whm-menu",
+    category: "Design",
+    title: "Women's History Month Menu",
+    description:
+      "Seasonal cocktail menu design tying each drink to a trailblazing woman, with proceeds benefiting the Cool Girls Foundation.",
+    thumbAlt: "Women's History Month cocktail menu design",
+    thumb: "contain",
+    src: "/work/womens-history-menu.png",
   },
   {
-    rowSrc: "/work/row-happyhour-atrium.png",
-    cards: [
-      {
-        half: "left",
-        category: "Menu Sample",
-        title: "BB Happy Hour Menu",
-        description:
-          "Branded happy hour menu for the oyster program — oyster selections, drink pairings, and a clean editorial layout that matches the restaurant's tone.",
-        thumbAlt: "BB Happy Hour oyster menu design",
-      },
-      {
-        half: "right",
-        category: "Event Design",
-        title: "Mother's Day Brunch — Atrium",
-        description:
-          "Event menu design for the Mother's Day brunch at Atrium, featuring a soft floral aesthetic and multi-course first course layout.",
-        thumbAlt: "Mother's Day brunch menu at Atrium",
-      },
-    ],
+    key: "video-carmel",
+    category: "Content Creation & Video Editing",
+    title: "Short-Form Video — Carmel",
+    description:
+      "Filmed, directed, and edited short-form video content for TikTok and Instagram Reels — part of a content series that drove 30K+ views and grew Carmel's social presence.",
+    thumb: "video",
   },
   {
-    rowSrc: "/work/row-mothers-email.png",
-    cards: [
-      {
-        half: "left",
-        category: "Event Design",
-        title: "Mother's Day Brunch — Carmel",
-        description:
-          "Promotional design for Carmel's Mother's Day brunch — botanical illustration style with handwritten typography, distinct from the sister restaurant.",
-        thumbAlt: "Mother's Day brunch promotional design for Carmel",
-      },
-      {
-        half: "right",
-        category: "Email Marketing",
-        title: "Carmel Oyster Bar Launch",
-        description:
-          "Full Mailchimp email campaign announcing the Oyster Bar opening — brand reveal, menu highlights, dinner menu update, and a teaser for what's next.",
-        thumbAlt: "Carmel Oyster Bar launch email campaign preview",
-      },
-    ],
+    key: "carmel-ig",
+    category: "Social Media Management",
+    title: "@carmelatl — Instagram",
+    description:
+      "Full ownership of Carmel's Instagram — content planning, photography direction, caption writing, and publishing across feed and Reels. Grew account through consistent brand storytelling and visual cohesion.",
+    thumbAlt:
+      "Carmel Oyster Bar hero table photography — oyster spread and seafood platter from the Oyster Bar opening push",
+    thumb: "cover",
+    src: "/work/oyster-bar-seafood-spread.jpg",
+  },
+  {
+    key: "bb-happy-hour",
+    category: "Menu Sample",
+    title: "BB Happy Hour Menu",
+    description:
+      "Branded happy hour menu for the oyster program — oyster selections, drink pairings, and a clean editorial layout that matches the restaurant's tone.",
+    thumbAlt: "BB Happy Hour menu print design",
+    thumb: "contain",
+    src: "/work/bb-happy-hour-menu.png",
+  },
+  {
+    key: "mothers-atrium",
+    category: "Event Design",
+    title: "Mother's Day Brunch — Atrium",
+    description:
+      "Event menu design for the Mother's Day brunch at Atrium, featuring a soft floral aesthetic and multi-course first course layout.",
+    thumbAlt: "Mother's Day brunch menu at Atrium",
+    thumb: "contain",
+    src: "/work/mothers-day-atrium.png",
+  },
+  {
+    key: "mothers-carmel",
+    category: "Event Design",
+    title: "Mother's Day Brunch — Carmel",
+    description:
+      "Promotional design for Carmel's Mother's Day brunch — botanical illustration style with handwritten typography, distinct from the sister restaurant.",
+    thumbAlt: "Mother's Day brunch promotional flyer for Carmel",
+    thumb: "contain",
+    src: "/work/mothers-day-carmel.png",
+  },
+  {
+    key: "oyster-email",
+    category: "Email Marketing",
+    title: "Carmel Oyster Bar Launch",
+    description:
+      "Full Mailchimp email campaign announcing the Oyster Bar opening — brand reveal, menu highlights, dinner menu update, and a teaser for what's next.",
+    thumbAlt: "Carmel fish dish photography used for Oyster Bar launch campaign",
+    thumb: "cover",
+    src: "/work/carmel-oyster-launch-fish.jpg",
   },
 ];
+
+function VideoThumb() {
+  return (
+    <div className="video-thumb">
+      <div
+        style={{
+          width: 54,
+          height: 54,
+          borderRadius: "50%",
+          border: "2px solid #C8472B",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        aria-hidden
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 7l10 5-10 5V7z" fill="#C8472B" />
+        </svg>
+      </div>
+      <div
+        style={{
+          fontSize: 11,
+          letterSpacing: "0.15em",
+          textTransform: "uppercase",
+          color: "#C8472B",
+          marginTop: 4,
+        }}
+      >
+        Video Content
+      </div>
+      <div
+        style={{
+          fontFamily: "Georgia, serif",
+          fontSize: "1rem",
+          color: "#F5F0E8",
+          fontStyle: "italic",
+          marginTop: 4,
+          textAlign: "center",
+          lineHeight: 1.4,
+        }}
+      >
+        Short-Form
+        <br />
+        Content Reel
+      </div>
+      <div style={{ fontSize: 11, color: "#6B5B4E", marginTop: 6 }}>TikTok / Instagram Reels</div>
+    </div>
+  );
+}
 
 export default function Portfolio() {
   const showSection = useCallback((id: SectionId, el: HTMLButtonElement | null) => {
@@ -244,8 +287,8 @@ export default function Portfolio() {
                 brand storytelling and content strategy.
               </li>
               <li>
-                Planned and executed <strong>20+ marketing and promotional events</strong> supporting seasonal
-                campaigns and brand launches.
+                Planned and executed <strong>20+ marketing and promotional events</strong> supporting seasonal campaigns
+                and brand launches.
               </li>
               <li>
                 Launched TikTok channel with short-form video content achieving <strong>30K+ views</strong>, expanding
@@ -326,23 +369,35 @@ export default function Portfolio() {
         </div>
 
         <div className="portfolio-grid portfolio-grid--work" id="portfolio-grid">
-          {WORK_ROWS.flatMap((row) =>
-            row.cards.map((card) => (
-              <article className="work-card" key={`${row.rowSrc}-${card.half}`}>
+          {WORK_ITEMS.map((item) => (
+            <article className="work-card" key={item.key}>
+              {item.thumb === "video" ? (
+                <VideoThumb />
+              ) : item.src ? (
                 <div
-                  className={`work-split-thumb ${card.half === "right" ? "work-split-thumb--right" : ""}`}
-                  style={{ backgroundImage: `url(${encodeURI(row.rowSrc)})` }}
-                  role="img"
-                  aria-label={card.thumbAlt}
-                />
-                <div className="card-body">
-                  <div className="card-category">{card.category}</div>
-                  <div className="card-title-static">{card.title}</div>
-                  <div className="card-desc-static">{card.description}</div>
+                  className={`work-card-media work-card-media--${item.thumb === "contain" ? "contain" : "cover"}`}
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.thumbAlt ?? ""}
+                    fill
+                    sizes="(max-width: 580px) 100vw, 45vw"
+                    className={
+                      item.thumb === "contain"
+                        ? "work-card-media-img work-card-img-fit--contain"
+                        : "work-card-media-img work-card-img-fit--cover"
+                    }
+                    priority={item.key === "bellina"}
+                  />
                 </div>
-              </article>
-            )),
-          )}
+              ) : null}
+              <div className="card-body">
+                <div className="card-category">{item.category}</div>
+                <div className="card-title-static">{item.title}</div>
+                <div className="card-desc-static">{item.description}</div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
 

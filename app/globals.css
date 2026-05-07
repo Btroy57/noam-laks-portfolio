@@ -267,7 +267,7 @@ body {
   gap: 1.5rem;
 }
 
-/* Work samples: always two-up like reference composites */
+/* Work samples: two-column grid on larger screens */
 .portfolio-grid--work {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -276,6 +276,27 @@ body {
   .portfolio-grid--work {
     grid-template-columns: 1fr;
   }
+}
+
+.work-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.work-card-img-fit--cover {
+  object-fit: cover;
+  object-position: center;
+}
+
+.work-card-img-fit--contain {
+  object-fit: contain;
+  object-position: center;
+  padding: 0.65rem;
+  box-sizing: border-box;
+  background: var(--cream);
 }
 
 .work-card {
@@ -309,21 +330,6 @@ body {
 
 .card-img-wrap:hover img {
   transform: scale(1.03);
-}
-
-/* Composite screenshot: one PNG per row; show left or right half via background (avoids full image in both cells) */
-.work-split-thumb {
-  width: 100%;
-  aspect-ratio: 512 / 644;
-  overflow: hidden;
-  background-color: #0a0a0a;
-  background-repeat: no-repeat;
-  background-size: 200% 100%;
-  background-position: left center;
-}
-
-.work-split-thumb--right {
-  background-position: right center;
 }
 
 .phone-wrap {
