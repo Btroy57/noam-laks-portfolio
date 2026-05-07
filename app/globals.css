@@ -300,6 +300,27 @@ body {
   transform: scale(1.03);
 }
 
+/* Composite screenshot: left / right halves (1024×644 source, two cards per row) */
+.work-split-thumb {
+  width: 100%;
+  aspect-ratio: 512 / 644;
+  overflow: hidden;
+  background: #0a0a0a;
+  position: relative;
+}
+
+.work-split-thumb .work-split-img {
+  width: 200%;
+  height: auto;
+  max-width: none;
+  display: block;
+  transform: translateX(0);
+}
+
+.work-split-thumb--right .work-split-img {
+  transform: translateX(-50%);
+}
+
 .phone-wrap {
   width: 100%;
   aspect-ratio: 4 / 3;

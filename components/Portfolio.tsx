@@ -1,30 +1,110 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback } from "react";
 
 type SectionId = "about" | "experience" | "work" | "contact";
 
-function VideoPlayMark() {
-  return (
-    <div
-      style={{
-        width: 54,
-        height: 54,
-        borderRadius: "50%",
-        border: "2px solid #C8472B",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-      aria-hidden
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M9 7l10 5-10 5V7z" fill="#C8472B" />
-      </svg>
-    </div>
-  );
-}
+type WorkHalf = "left" | "right";
+
+type WorkCardDef = {
+  half: WorkHalf;
+  category: string;
+  title: string;
+  description: string;
+  thumbAlt: string;
+};
+
+type WorkRowDef = {
+  rowSrc: string;
+  cards: [WorkCardDef, WorkCardDef];
+};
+
+const WORK_ROWS: WorkRowDef[] = [
+  {
+    rowSrc: "/work/row-bellina-whm.png",
+    cards: [
+      {
+        half: "left",
+        category: "Social Media Management",
+        title: "@bellinaalimentari — Instagram",
+        description:
+          "Managed Bellina Alimentari's social presence across food content, event coverage, and brand campaigns — maintaining a distinct Italian identity across all posts.",
+        thumbAlt: "Bellina Alimentari Instagram grid in phone mockup",
+      },
+      {
+        half: "right",
+        category: "Design",
+        title: "Women's History Month Menu",
+        description:
+          "Seasonal cocktail menu design tying each drink to a trailblazing woman, with proceeds benefiting the Cool Girls Foundation.",
+        thumbAlt: "Women's History Month cocktail menu design",
+      },
+    ],
+  },
+  {
+    rowSrc: "/work/row-video-carmel.png",
+    cards: [
+      {
+        half: "left",
+        category: "Content Creation & Video Editing",
+        title: "Short-Form Video — Carmel",
+        description:
+          "Filmed, directed, and edited short-form video content for TikTok and Instagram Reels — part of a content series that drove 30K+ views and grew Carmel's social presence.",
+        thumbAlt: "Short-form video reel graphic for Carmel",
+      },
+      {
+        half: "right",
+        category: "Social Media Management",
+        title: "@carmelatl — Instagram",
+        description:
+          "Full ownership of Carmel's Instagram — content planning, photography direction, caption writing, and publishing across feed and Reels. Grew account through consistent brand storytelling and visual cohesion.",
+        thumbAlt: "Carmel Atlanta Instagram profile in phone mockup",
+      },
+    ],
+  },
+  {
+    rowSrc: "/work/row-happyhour-atrium.png",
+    cards: [
+      {
+        half: "left",
+        category: "Menu Sample",
+        title: "BB Happy Hour Menu",
+        description:
+          "Branded happy hour menu for the oyster program — oyster selections, drink pairings, and a clean editorial layout that matches the restaurant's tone.",
+        thumbAlt: "BB Happy Hour oyster menu design",
+      },
+      {
+        half: "right",
+        category: "Event Design",
+        title: "Mother's Day Brunch — Atrium",
+        description:
+          "Event menu design for the Mother's Day brunch at Atrium, featuring a soft floral aesthetic and multi-course first course layout.",
+        thumbAlt: "Mother's Day brunch menu at Atrium",
+      },
+    ],
+  },
+  {
+    rowSrc: "/work/row-mothers-email.png",
+    cards: [
+      {
+        half: "left",
+        category: "Event Design",
+        title: "Mother's Day Brunch — Carmel",
+        description:
+          "Promotional design for Carmel's Mother's Day brunch — botanical illustration style with handwritten typography, distinct from the sister restaurant.",
+        thumbAlt: "Mother's Day brunch promotional design for Carmel",
+      },
+      {
+        half: "right",
+        category: "Email Marketing",
+        title: "Carmel Oyster Bar Launch",
+        description:
+          "Full Mailchimp email campaign announcing the Oyster Bar opening — brand reveal, menu highlights, dinner menu update, and a teaser for what's next.",
+        thumbAlt: "Carmel Oyster Bar launch email campaign preview",
+      },
+    ],
+  },
+];
 
 export default function Portfolio() {
   const showSection = useCallback((id: SectionId, el: HTMLButtonElement | null) => {
@@ -240,181 +320,35 @@ export default function Portfolio() {
         <div className="portfolio-header">
           <h2>Work Samples</h2>
           <p>
-            A selection of campaigns, menus, event designs, press, social media management, and email marketing
-            produced for Oliva Restaurant Group.
+            A selection of campaigns, menus, event designs, press, social media management, and email marketing produced
+            for Oliva Restaurant Group.
           </p>
         </div>
 
         <div className="portfolio-grid" id="portfolio-grid">
-          <article className="work-card">
-            <div className="video-thumb">
-              <VideoPlayMark />
-              <div
-                style={{
-                  fontSize: 11,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "#C8472B",
-                  marginTop: 4,
-                }}
-              >
-                Video Content
-              </div>
-              <div
-                style={{
-                  fontFamily: "Georgia, serif",
-                  fontSize: "1rem",
-                  color: "#F5F0E8",
-                  fontStyle: "italic",
-                  marginTop: 4,
-                  textAlign: "center",
-                  lineHeight: 1.4,
-                }}
-              >
-                Short-Form
-                <br />
-                Content Reel
-              </div>
-              <div style={{ fontSize: 11, color: "#6B5B4E", marginTop: 6 }}>TikTok / Instagram Reels</div>
-            </div>
-            <div className="card-body">
-              <div className="card-category">Content Creation & Video Editing</div>
-              <div className="card-title-static">Short-Form Video — Carmel</div>
-              <div className="card-desc-static">
-                Filmed, directed, and edited short-form video content for TikTok and Instagram Reels — part of a content
-                series that drove 30K+ views and grew Carmel&apos;s social presence.
-              </div>
-            </div>
-          </article>
-
-          <article className="work-card">
-            <div className="phone-wrap">
-              <div className="phone-inner">
-                <Image
-                  src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80"
-                  alt="Carmel Instagram grid preview — hospitality photography"
-                  width={400}
-                  height={867}
-                  sizes="(max-width: 580px) 100vw, 280px"
-                  style={{ objectFit: "cover", objectPosition: "top" }}
-                />
-              </div>
-            </div>
-            <div className="card-body">
-              <div className="card-category">Social Media</div>
-              <div className="card-title-static">Carmel — Instagram Grid</div>
-              <div className="card-desc-static">
-                Curated visual rhythm for Carmel&apos;s feed: seasonal campaigns, event highlights, and on-brand
-                storytelling aligned with in-restaurant experience.
-              </div>
-            </div>
-          </article>
-
-          <article className="work-card">
-            <div className="card-img-wrap">
-              <Image
-                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80"
-                alt="Seasonal menu design and photography"
-                width={520}
-                height={390}
-                sizes="(max-width: 580px) 100vw, 280px"
-              />
-            </div>
-            <div className="card-body">
-              <div className="card-category">Menu & Print</div>
-              <div className="card-title-static">Seasonal Menu Launch</div>
-              <div className="card-desc-static">
-                Menu architecture, dish photography direction, and copy supporting LTOs and wine pairings across
-                locations.
-              </div>
-            </div>
-          </article>
-
-          <article className="work-card">
-            <div className="card-img-wrap">
-              <Image
-                src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80"
-                alt="Private dining event setup"
-                width={520}
-                height={390}
-                sizes="(max-width: 580px) 100vw, 280px"
-              />
-            </div>
-            <div className="card-body">
-              <div className="card-category">Events</div>
-              <div className="card-title-static">Brand Events & Activations</div>
-              <div className="card-desc-static">
-                End-to-end event storytelling: invites, run-of-show, onsite signage, and social coverage for 20+
-                productions.
-              </div>
-            </div>
-          </article>
-
-          <article className="work-card">
-            <div className="press-thumb">
-              <div
-                style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  fontSize: "1.25rem",
-                  color: "var(--ink)",
-                }}
-              >
-                Press & Partnerships
-              </div>
-              <div style={{ fontSize: 12, color: "var(--warm-mid)", lineHeight: 1.5 }}>
-                Earned and coordinated coverage across local and trade outlets.
-              </div>
-              <div style={{ marginTop: 8 }}>
-                <span className="outlet-pill">Local media</span>
-                <span className="outlet-pill">Hospitality trade</span>
-                <span className="outlet-pill">Influencer</span>
-              </div>
-            </div>
-            <div className="card-body">
-              <div className="card-category">Public Relations</div>
-              <div className="card-title-static">Press Kit & Outreach</div>
-              <div className="card-desc-static">
-                Packaged brand narratives and visuals for journalists and partners; supported launches with coordinated
-                pitching and follow-up.
-              </div>
-            </div>
-          </article>
-
-          <article className="work-card">
-            <div
-              className="press-thumb"
-              style={{ background: "var(--cream)", borderBottom: "1px solid var(--rule)" }}
-            >
-              <div
-                style={{
-                  fontSize: 10,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "var(--accent)",
-                }}
-              >
-                Email
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  fontSize: "1.1rem",
-                  color: "var(--ink)",
-                  marginTop: 6,
-                }}
-              >
-                Campaign Templates
-              </div>
-              <div style={{ fontSize: 11, color: "var(--warm-mid)", marginTop: 6 }}>Reservations · Promotions · LTOs</div>
-            </div>
-            <div className="card-body">
-              <div className="card-category">Email Marketing</div>
-              <div className="card-title-static">Lifecycle & Promotional Sends</div>
-              <div className="card-desc-static">
-                Designed and wrote segmented campaigns for holidays, chef features, and reservation-driving promotions.
-              </div>
-            </div>
-          </article>
+          {WORK_ROWS.flatMap((row) =>
+            row.cards.map((card) => (
+              <article className="work-card" key={`${row.rowSrc}-${card.half}`}>
+                <div
+                  className={`work-split-thumb ${card.half === "left" ? "work-split-thumb--left" : "work-split-thumb--right"}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element -- composite split crops */}
+                  <img
+                    className="work-split-img"
+                    src={row.rowSrc}
+                    width={1024}
+                    height={644}
+                    alt={card.thumbAlt}
+                  />
+                </div>
+                <div className="card-body">
+                  <div className="card-category">{card.category}</div>
+                  <div className="card-title-static">{card.title}</div>
+                  <div className="card-desc-static">{card.description}</div>
+                </div>
+              </article>
+            )),
+          )}
         </div>
       </div>
 
